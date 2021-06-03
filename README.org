@@ -1,0 +1,40 @@
+* toy-scheme.el
+  Handle custom local path schemes defined in =schemes.txt=
+
+** Motivation
+   =toy-scheme.el= is primary for my game development. When we write files that refer to other
+   files, we want something better than relative path.
+
+   =schemes.txt= is a list of /custom local path schemes/. If you write /schemed path/ in syntax
+   =<scheme>:<content>=, it can be converted to =<scheme_path>/<content_path>= referring to
+   =schemes.txt=.
+
+*** Example
+    Say we have many files:
+
+    #+BEGIN_SRC
+    assets/
+    ├── map
+    │   ├── tileset
+    │   │   └── tileset-1.png
+    │   ├── tmx
+    │   │   └── map-data-1.tmx
+    │   └── tsx
+    │       └── tileset-1.tsx
+    └── scripts
+        └── script1.lisp
+    #+END_SRC
+
+    If we want to refer to =map-data-1.tmx= from =script1.lisp=, we have to write as
+    =../map/tmx/map-data-1.tmx=. This is uncomfortable!
+    Instead, we can write it as ="map:map-data-1.tmx"= if we define =assets/schemes.txt=:
+
+   #+BEGIN_SRC
+   ROOT: .
+
+   map: map
+   tmx: map/tmx
+   tsx: map/tsx
+   tileset: map/tileset
+   #+END_SRC
+
