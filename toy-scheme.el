@@ -29,7 +29,7 @@
     :group 'toy-scheme)
 
 (defun toy-scheme--s2rel (scheme &optional scheme-file)
-    "Converts scheme to relative path from the root directory."
+    "Converts scheme to relative path from a root directory."
     (when scheme-file (setq scheme-file (expand-file-name scheme-file)))
     (unless scheme-file (setq scheme-file (toy-scheme-locate)))
 
@@ -37,18 +37,19 @@
 
     ;; grep "^$scheme" "$file" | grep ':' | head -n 1 | awk -F':' '{print $2}' | <trim>
     (when (file-exists-p scheme-file)
-        (with-temp-buffer
-            (insert-file-contents scheme-file)
-
-            ;; FIXME: grep "^$scheme:"
-            (let* ((search (concat "^" scheme ":"))
-                   (match (occur search))
-                   (line (car match)))
-                ;; get content after `:`
-                (when line
-                    (let* ((parts (s-split ":" line))
-                           (content (cdr parts)))
-                        (s-trim-left content)))))))
+        ;; grep "^$scheme:"
+        (let ((pattern (concat "^" scheme ":")))
+            (with-temp-buffer
+                (insert-file-contents scheme-file)
+                (goto-char (point-min))
+                (when (re-search-forward pattern nil 'no-error)
+                    (let ((line (buffer-substring-no-properties (point-at-bol) (point-at-eol))))
+                        ;; get content after `:`
+                        (when line
+                            (let* ((parts (s-split ":" line))
+                                   (content (car (cdr parts))))
+                                ;; then trim
+                                (s-trim-left content)))))))))
 
 (defun toy-scheme--s2abs (scheme &optional root-dir scheme-file)
     "Converts scheme to absolute path."
@@ -74,17 +75,16 @@
 ;;;###autoload
 (defun toy-scheme-resolve-path (path)
     "Returns where the schemed path refers to."
-    (interactive)
+    (interactive "sPath:")
     ;; parse `scheme:content'
     (let* ((parts (s-split ":" path))
            (scheme (car parts))
-           (content (cdr parts)))
+           (content (car (cdr parts))))
         (if (not content)
                 ;; Relative/absolute path only
                 scheme
             ;; Scheme + relative path
             (setq scheme (toy-scheme-resolve-scheme scheme))
-            (concat (file-name-as-directory scheme) content)
-            )))
+            (concat (file-name-as-directory scheme) content))))
 
 ;;; toy-scheme.el ends here
