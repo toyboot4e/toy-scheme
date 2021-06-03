@@ -3,14 +3,14 @@
 
 ** Motivation
    =toy-scheme.el= is primary for my game development. When we write files that refer to other
-   files, we want something better than relative path.
+   files, we want something better than relative path. I'm adding /schemed path/ to my game.
 
-   =schemes.txt= is a list of /custom local path schemes/. If you write /schemed path/ in syntax
+   =schemes.txt= is a list of /custom local path schemes/. If you write schemed path in syntax
    =<scheme>:<content>=, it can be converted to =<scheme_path>/<content_path>= referring to
    =schemes.txt=.
 
 ** Example
-    Say we have many files:
+    Say we have many files in non-flat directories:
 
     #+BEGIN_SRC
     assets/
@@ -27,7 +27,7 @@
 
     If we want to refer to =map-data-1.tmx= from =script1.lisp=, we have to write as
     =../map/tmx/map-data-1.tmx=. This is uncomfortable!
-    Instead, we can write it as ="map:map-data-1.tmx"= if we define =assets/schemes.txt=:
+    Instead, we can write it as ="map:map-data-1.tmx"= writing =assets/schemes.txt=:
 
    #+BEGIN_SRC
    ROOT: .
@@ -37,4 +37,7 @@
    tsx: map/tsx
    tileset: map/tileset
    #+END_SRC
+
+   Now ="map:map-data-1.tmx"= refers to =assets/map/tmx/map-data-1.tmx=. Much better!
+   And we can get editor support for schemed paths using =toy-scheme.el=.
 
