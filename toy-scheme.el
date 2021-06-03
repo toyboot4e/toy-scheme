@@ -1,3 +1,5 @@
+;;; toy-scheme.el --- Handle custom path schemes defined in `schemes.txt'
+
 ;; Author: toyboot4e <toyboot4e@gmail.com>
 ;; Version: 0.0.0
 ;; Homepage: https://github.com/toyboot4e/toy-scheme
@@ -7,7 +9,7 @@
 
 ;;; Commentary:
 
-;; `toy-scheme.el' is a package for handling custom path schemes in `schemes.txt'.
+;; `toy-scheme.el' is a package for handling custom path schemes defined in `schemes.txt'.
 
 ;;; Code:
 
