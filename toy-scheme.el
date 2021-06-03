@@ -18,4 +18,23 @@
 ;; indent-tabs-mode: nil
 ;; END
 
+(defgroup toy-scheme nil
+    "Custom scheme configuration."
+    :group 'toy-scheme)
+
+(defcustom toy-scheme-file-name
+    "schemes.txt"
+    "Custom scheme file name."
+    :type 'string
+    :group 'toy-scheme)
+
+;;;###autoload
+(defun toy-scheme-locate (&optional dir)
+    "Locates the scheme file going upwards the directory."
+    (interactive)
+    (unless dir (setq dir default-directory))
+    (let ((root-dir (locate-dominating-file dir toy-scheme-file-name)))
+        (when root-dir
+            (concat root-dir toy-scheme-file-name))))
+
 ;;; toy-scheme.el ends here
