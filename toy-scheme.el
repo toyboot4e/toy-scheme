@@ -37,4 +37,31 @@
         (when root-dir
             (concat root-dir toy-scheme-file-name))))
 
+;;;###autoload
+(defun toy-scheme-resolve-scheme (scheme &optional file)
+    "Returns a corresponding absolute path to the given scheme."
+    (unless file (setq file (toy-scheme-locate)))
+    (interactive)
+    scheme)
+
+;;;###autoload
+(defun toy-scheme-resolve (path)
+    "Figures out where the schemed path refers to."
+    (interactive)
+    (let ((root-file (toy-scheme-locate)))
+        ;; (unless root-file (error "Unable to locate scheme file"))
+        ;; parse `scheme:content'
+        (let* ((parts (s-split ":" root-file))
+               (scheme (car parts))
+               (content (cdr parts)))
+            (if (not content)
+                    ;; Relative/absolute path only
+                    scheme
+                ;; Scheme + relative path
+                (setq scheme (toy-scheme-resolve-scheme scheme))
+                (setq content (s-trim-left content))
+                ;; (concat scheme "/" content)
+                ;; (let (line (grep (concat "^" scheme) 
+                ))))
+
 ;;; toy-scheme.el ends here

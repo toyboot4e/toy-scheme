@@ -9,7 +9,7 @@
    =<scheme>:<content>=, it can be converted to =<scheme_path>/<content_path>= referring to
    =schemes.txt=.
 
-*** Example
+** Example
     Say we have many files:
 
     #+BEGIN_SRC
