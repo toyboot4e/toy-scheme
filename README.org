@@ -32,9 +32,6 @@
     Instead, we can write it as ="map:map-data-1.tmx"= if we add =assets/schemes.txt=:
 
    #+BEGIN_SRC
-   ROOT: .
-
-   map: map
    tmx: map/tmx
    tsx: map/tsx
    tileset: map/tileset
