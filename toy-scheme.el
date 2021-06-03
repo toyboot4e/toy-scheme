@@ -42,6 +42,7 @@
     "Returns a corresponding absolute path to the given scheme."
     (unless file (setq file (toy-scheme-locate)))
     (interactive)
+    ;; TODO: grep
     scheme)
 
 ;;;###autoload
@@ -60,8 +61,8 @@
                 ;; Scheme + relative path
                 (setq scheme (toy-scheme-resolve-scheme scheme))
                 (setq content (s-trim-left content))
-                ;; (concat scheme "/" content)
-                ;; (let (line (grep (concat "^" scheme) 
+                ;; FIXME: don't create double slash
+                (concat scheme "/" content)
                 ))))
 
 ;;; toy-scheme.el ends here

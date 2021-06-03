@@ -9,7 +9,7 @@
 ** Motivation
    =toy-scheme.el= is primary for my game development. While I'm writing files that refer to other
    files, I could use relative path, but it was very uncomfortable. So I'm adding /schemed path/ to
-   my game with Emacs editor support.
+   my game framework with Emacs editor support.
 
 ** Example
     Say we have many files in non-flat directories:
@@ -41,7 +41,7 @@
    #+END_SRC
 
    Now ="map:map-data-1.tmx"= refers to =assets/map/tmx/map-data-1.tmx=. Much better! Other schemes
-   =map=, =tsx= and =tileset= also works.
+   =map=, =tsx= and =tileset= also work.
 
    =toy-scheme.el= adds editor support for this kind of paths.
 
