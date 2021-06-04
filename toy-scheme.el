@@ -30,6 +30,9 @@
     ;; (setq ffap-file-finder #'toy-scheme--ffap-file-finder)
     (advice-add #'find-file-at-point :around #'toy-scheme-ffap-advice))
 
+(define-global-minor-mode global-toy-scheme-mode toy-scheme-mode
+    (lambda () (toy-scheme-mode 1)))
+
 (defun toy-scheme--s2rel (scheme &optional scheme-file)
     "Converts scheme to relative path from a root directory."
     (when scheme-file (setq scheme-file (expand-file-name scheme-file)))
