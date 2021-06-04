@@ -13,11 +13,6 @@
 
 ;;; Code:
 
-;; Local variables:
-;; lisp-body-indent: 4
-;; indent-tabs-mode: nil
-;; END
-
 (defgroup toy-scheme nil
     "Custom scheme configuration."
     :group 'toy-scheme)
@@ -130,5 +125,10 @@
             (if resolved
                     (find-file resolved)
                 (original-func filename)))))
+
+;;; Local variables:      ***
+;;; lisp-body-indent: 4   ***
+;;; indent-tabs-mode: nil ***
+;;; End:                  ***
 
 ;;; toy-scheme.el ends here
