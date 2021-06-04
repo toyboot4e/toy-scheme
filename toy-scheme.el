@@ -131,4 +131,6 @@
 ;;; indent-tabs-mode: nil ***
 ;;; End:                  ***
 
+(provide 'toy-scheme)
+
 ;;; toy-scheme.el ends here
