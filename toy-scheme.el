@@ -28,6 +28,13 @@
     :type 'string
     :group 'toy-scheme)
 
+;;;###autoload
+(define-minor-mode toy-scheme-mode
+    "Minor mode to utilize schemed path (aliases)."
+    :lighter " toy-scheme"
+    ;; (setq ffap-file-finder #'toy-scheme--ffap-file-finder)
+    (advice-add #'find-file-at-point :around #'toy-scheme-ffap-advice))
+
 (defun toy-scheme--s2rel (scheme &optional scheme-file)
     "Converts scheme to relative path from a root directory."
     (when scheme-file (setq scheme-file (expand-file-name scheme-file)))
@@ -104,12 +111,24 @@
             (when resolved
                 (find-file resolved)))))
 
-(defun toy-scheme-ffap ()
+(defun toy-scheme-ffap (&optional filename)
     (interactive)
-    (let* ((string (thing-at-point 'filename))
+    (let* ((string (if filename filename (thing-at-point 'filename)))
            (resolved (toy-scheme-resolve string)))
         (if resolved
                 (find-file resolved)
-            (find-file-at-point))))
+            (find-file-at-point filename))))
+
+(defun toy-scheme-ffap-advice (original-func &optional filename)
+    "Function for use in `add-advice :around'"
+    (interactive)
+    (if (not toy-scheme-mode)
+            (funcall original-func filename)
+        ;; almost same as `toy-scheme-ffap', but uses the `original-func` parameter
+        (let* ((string (thing-at-point 'filename))
+               (resolved (toy-scheme-resolve string)))
+            (if resolved
+                    (find-file resolved)
+                (original-func filename)))))
 
 ;;; toy-scheme.el ends here
