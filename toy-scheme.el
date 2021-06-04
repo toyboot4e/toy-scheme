@@ -57,6 +57,15 @@
         (unless root-dir (setq root-dir (file-name-directory (toy-scheme-locate))))
         (concat root-dir rel)))
 
+(defun toy-scheme--resolve-parsed (scheme content)
+    (setq scheme (toy-scheme-resolve-scheme scheme))
+    (concat (file-name-as-directory scheme) content))
+
+(defun toy-scheme--find-parsed (scheme content)
+    (let (path (toy-scheme--resolve-parsed scheme content))
+        (when path
+            (find-file path))))
+
 ;;;###autoload
 (defun toy-scheme-locate (&optional dir)
     "Locates the scheme file going upwards the directory."
@@ -73,9 +82,8 @@
     (toy-scheme--s2abs scheme scheme-file))
 
 ;;;###autoload
-(defun toy-scheme-resolve-path (path)
+(defun toy-scheme-resolve (path)
     "Returns where the schemed path refers to."
-    (interactive "sPath:")
     ;; parse `scheme:content'
     (let* ((parts (s-split ":" path))
            (scheme (car parts))
@@ -84,7 +92,6 @@
                 ;; Relative/absolute path only
                 scheme
             ;; Scheme + relative path
-            (setq scheme (toy-scheme-resolve-scheme scheme))
-            (concat (file-name-as-directory scheme) content))))
+            (toy-scheme--resolve-parsed scheme content))))
 
 ;;; toy-scheme.el ends here
