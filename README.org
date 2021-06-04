@@ -28,7 +28,7 @@
 
     If we want to refer to =map-data-1.tmx= from =script1.lisp=, we have to write as
     =../map/tmx/map-data-1.tmx=. This is not elegant.
-    Instead, we can write it as =map:map-data-1.tmx= if we add =assets/schemes.txt=:
+    Instead, we can write it as =tmx:map-data-1.tmx= if we add =assets/schemes.txt=:
 
    #+BEGIN_SRC
    tmx: map/tmx
@@ -36,8 +36,8 @@
    tileset: map/tileset
    #+END_SRC
 
-   Now =map:map-data-1.tmx= refers to =assets/map/tmx/map-data-1.tmx=. Much better! Other schemes
-   =map=, =tsx= and =tileset= also work.
+   Now =tmx:map-data-1.tmx= refers to =assets/map/tmx/map-data-1.tmx=. Much better! Other schemes
+   (=tsx= and =tileset=) also work.
 
    =toy-scheme.el= adds editor support for this kind of paths.
 
