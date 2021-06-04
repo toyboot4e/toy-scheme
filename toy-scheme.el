@@ -94,4 +94,22 @@
             ;; Scheme + relative path
             (toy-scheme--resolve-parsed scheme content))))
 
+;;;###autoload
+(defun toy-scheme-find (&optional path)
+    "Tries to resolve and open the schemed path."
+    (interactive "sPath:")
+    (if (not pass)
+            (toy-scheme-ffap)
+        (let ((resolved (toy-scheme-resolve path)))
+            (when resolved
+                (find-file resolved)))))
+
+(defun toy-scheme-ffap ()
+    (interactive)
+    (let* ((string (thing-at-point 'filename))
+           (resolved (toy-scheme-resolve string)))
+        (if resolved
+                (find-file resolved)
+            (find-file-at-point))))
+
 ;;; toy-scheme.el ends here
