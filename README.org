@@ -1,10 +1,9 @@
 * toy-scheme.el
-  Handle custom local path schemes defined in =schemes.txt=
+  Handle custom local path schemes (aliases) defined in =schemes.txt=
 
 ** About
    =schemes.txt= is a list of /custom local path schemes/. If you write schemed path in syntax
-   =<scheme>:<content>=, it can be converted to =<scheme_path>/<content_path>= referring to
-   =schemes.txt=.
+   =<scheme>:path=, it can be converted to =<scheme_path>/path= referring to =schemes.txt=.
 
 ** Motivation
    =toy-scheme.el= is primary for my game development. While I'm writing files that refer to other
@@ -29,7 +28,7 @@
 
     If we want to refer to =map-data-1.tmx= from =script1.lisp=, we have to write as
     =../map/tmx/map-data-1.tmx=. This is not elegant.
-    Instead, we can write it as ="map:map-data-1.tmx"= if we add =assets/schemes.txt=:
+    Instead, we can write it as =map:map-data-1.tmx= if we add =assets/schemes.txt=:
 
    #+BEGIN_SRC
    tmx: map/tmx
@@ -37,7 +36,7 @@
    tileset: map/tileset
    #+END_SRC
 
-   Now ="map:map-data-1.tmx"= refers to =assets/map/tmx/map-data-1.tmx=. Much better! Other schemes
+   Now =map:map-data-1.tmx= refers to =assets/map/tmx/map-data-1.tmx=. Much better! Other schemes
    =map=, =tsx= and =tileset= also work.
 
    =toy-scheme.el= adds editor support for this kind of paths.
