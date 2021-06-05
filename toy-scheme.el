@@ -17,6 +17,12 @@
     "Custom scheme configuration."
     :group 'toy-scheme)
 
+;; TODO: maybe use regex here for matching
+;; (defvar toy-scheme-regex ".*:.*"
+;;     "Regex for schemed path."
+;;     :type 'string
+;;     'group toy-scheme)
+
 (defcustom toy-scheme-file-name
     "schemes.txt"
     "Custom scheme file name."
@@ -109,6 +115,7 @@
             (when resolved
                 (find-file resolved)))))
 
+;;;###autoload
 (defun toy-scheme-ffap (&optional filename)
     (interactive)
     (let* ((string (if filename filename (thing-at-point 'filename)))

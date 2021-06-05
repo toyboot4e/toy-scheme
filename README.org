@@ -39,5 +39,6 @@
    Now =tmx:map-data-1.tmx= refers to =assets/map/tmx/map-data-1.tmx=. Much better! Other schemes
    (=tsx= and =tileset=) also work.
 
-   =toy-scheme.el= adds editor support for this kind of paths.
+   =toy-scheme.el= adds editor support for this kind of paths; it overrides =find-file-at-point=
+   with =advice-add=.
 
